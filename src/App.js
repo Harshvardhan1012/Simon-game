@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SimonBlock from "./SimonBlock"; 
+import click from './click.mp3'
 
 const textColors = {
   red: "text-red-500",
@@ -18,6 +19,7 @@ const SimonGame = () => {
     message: "Click Start to Play!",
     color: "blue",
   }); // Message to display to the user
+  const clickSound=new Audio(click);
 
 
   const addColorToSequence = () => {
@@ -32,9 +34,9 @@ const SimonGame = () => {
     addColorToSequence(); 
   };
 
-  const handleUserClick = (color) => {
+  const handleUserClick = async(color) => {
     if (!isUserTurn) return; 
-
+   await clickSound.play()
     if (color === sequence[userStep]) {
       if (userStep + 1 === sequence.length) {
         setUserStep(0); 
